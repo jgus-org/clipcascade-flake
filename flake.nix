@@ -68,6 +68,7 @@
             buildAttr = "clipcascade-server";
           };
           update-branches = flake-lib.lib.mkUpdateBranches {
+            minimumTrackingVersion = "3.2.0";
             inherit pkgs source;
             pinSchema = "github-asset";
           };
