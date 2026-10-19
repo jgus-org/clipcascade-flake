@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-lib = {
       url = "github:jgus-org/flake-lib/v1";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +15,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, flake-lib }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      treefmt-nix,
+      flake-lib,
+    }:
     let
       jdkVersion = 21;
       pin = import ./pin.nix;
@@ -25,9 +36,14 @@
         tag = "\${version}";
       };
     in
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
+        treefmtEval = treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.nixfmt.enable = true;
+        };
         jdk = pkgs."jdk${toString jdkVersion}_headless";
 
         src = pkgs.fetchurl {
@@ -60,6 +76,10 @@
         };
       in
       {
+        formatter = treefmtEval.config.build.wrapper;
+
+        checks.formatting = treefmtEval.config.build.check self;
+
         packages = {
           inherit clipcascade-server;
           default = clipcascade-server;
@@ -72,5 +92,6 @@
             pinSchema = "github-asset";
           };
         };
-      });
+      }
+    );
 }
