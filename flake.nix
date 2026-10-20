@@ -65,7 +65,6 @@
           default = clipcascade-server;
           update-version = flake-lib.lib.mkUpdateVersion {
             inherit pkgs source;
-            buildAttr = "clipcascade-server";
           };
           update-branches = flake-lib.lib.mkUpdateBranches {
             minimumTrackingVersion = "3.2.0";
