@@ -20,8 +20,7 @@
         asset = "ClipCascade-Server-JRE_${toString jdkVersion}.jar";
         owner = "Sathvik-Rao";
         repo = "ClipCascade";
-        # Release tags are unprefixed (3.2.0), overriding flake-lib's default v${version}.
-        tag = "\${version}";
+        tag = "v\${version}";
         type = "github-release-asset";
       };
     in
@@ -36,7 +35,7 @@
 
         src = pkgs.fetchurl {
           hash = pin.hash or "";
-          url = "https://github.com/${source.owner}/${source.repo}/releases/download/${version}/${source.asset}";
+          url = "https://github.com/${source.owner}/${source.repo}/releases/download/v${version}/${source.asset}";
         };
 
         clipcascade-server = pkgs.stdenvNoCC.mkDerivation {
