@@ -20,7 +20,6 @@
         asset = "ClipCascade-Server-JRE_${toString jdkVersion}.jar";
         owner = "Sathvik-Rao";
         repo = "ClipCascade";
-        # Upstream renamed its release tags to the v-prefixed form from 3.3.0; the fetchurl url below carries the same prefix.
         tag = "v\${version}";
         type = "github-release-asset";
       };
