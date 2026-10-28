@@ -27,6 +27,4 @@ The package installs upstream's server jar and launches it through `java -jar` u
 
 Upstream runs the server on port 8080, with a health endpoint at `/health`. Behaviour is set through `CC_*` environment variables — message-size limits and the peer-to-peer setting among them — as documented in the `docker-compose.yml` upstream attaches to each release. The server ships with upstream's default administrator credentials, `admin` / `admin123`; replace them before the port is reachable by anyone else.
 
-## License
-
-Upstream is licensed under the GNU General Public License version 3, so the published jar carries a copyleft license.
+See [LICENSE.md](LICENSE.md) for licensing and copyright, and [NOTICE.md](NOTICE.md) for the terms of upstream and distributed artifacts.
