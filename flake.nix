@@ -52,6 +52,7 @@
           meta = {
             description = "Self-hosted, end-to-end-encrypted clipboard sync server";
             homepage = "https://github.com/Sathvik-Rao/ClipCascade";
+            license = pkgs.lib.licenses.gpl3Only;
             mainProgram = "clipcascade-server";
             platforms = jdk.meta.platforms;
           };
