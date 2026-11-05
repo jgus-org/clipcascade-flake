@@ -2,7 +2,10 @@
   description = "ClipCascade server: self-hosted, end-to-end-encrypted clipboard sync (Sathvik-Rao/ClipCascade).";
 
   inputs = {
-    flake-lib.url = "github:jgus-org/flake-lib/v1";
+    flake-lib = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:jgus-org/flake-lib/v1";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
